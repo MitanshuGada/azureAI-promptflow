@@ -8,7 +8,7 @@ Connect with LLM's deployed on AzureAI and use promptflow to manage the flow.
 ```python -m venv {name of env} ``` e.g. ```python -m venv .venv ```
 
 3. Activate the virtual environment:
-Windows: ```.\\.venv\Scripts\activate``` Mac: ```source .\\.venv\bin\activate```
+Windows: ```.\.venv\Scripts\activate``` Mac: ```source .\.venv\bin\activate```
 
 4. Install the required libraries
 ```pip install -r requirements.txt```
