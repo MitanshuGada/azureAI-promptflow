@@ -24,14 +24,14 @@ def requestData(url: str, body: str, headers: dict):
 
 # returns a string 
 # @trace
-def flow(data: dict) -> str:
+def flow(data: dict, endpoint_name: str, api_key_name: str) -> str:
 	body = str.encode(json.dumps(data))
 
 	load_dotenv()
 	# url = os.getenv("PHI_3_MINI_4K_ENDPOINT")
 	# api_key = os.getenv("PHI_3_MINI_4K_API_KEY")
-	url = os.getenv("PHI_3_MEDIUM_4K_ENDPOINT")
-	api_key = os.getenv("PHI_3_MEDIUM_4K_API_KEY")
+	url = os.getenv(endpoint_name)
+	api_key = os.getenv(api_key_name)
 	print("endpoint and api key loaded...")
 	
 	headers = {"Content-Type": "application/json", "Authorization" :('Bearer '+ api_key)}
@@ -39,18 +39,11 @@ def flow(data: dict) -> str:
 
 	return result
 
-
-if __name__ == "__main__":
-	firstPrompt = open('./prompt1.txt').read()
-	secondPrompt = open('./prompt2.txt').read()
-
-	background = {1 : firstPrompt,
-				2 : secondPrompt}
-
-	product_description= "An elastomeric half mask respirator"
+def makePromptCall(file_name: str, prompt_text: str, endpoint_name: str, api_key_name: str) -> str:
+	prompt = open(file_name).read()
+	# product_description= "Electric Kettle"
 	messages=[
-		{"role": "user", "content": (background[2] + product_description)},
-		# {"role": "assistant", "content": "Paris, the capital of France, is known for its stunning architecture, art museums, historical landmarks, and romantic atmosphere. Here are some of the top attractions to see in Paris:\n\n1. The Eiffel Tower: The iconic Eiffel Tower is one of the most recognizable landmarks in the world and offers breathtaking views of the city.\n2. The Louvre Museum: The Louvre is one of the world's largest and most famous museums, housing an impressive collection of art and artifacts, including the Mona Lisa.\n3. Notre-Dame Cathedral: This beautiful cathedral is one of the most famous landmarks in Paris and is known for its Gothic architecture and stunning stained glass windows.\n\nThese are just a few of the many attractions that Paris has to offer. With so much to see and do, it's no wonder that Paris is one of the most popular tourist destinations in the world."},
+		{"role": "user", "content": (prompt + prompt_text)},
 		# {"role": "user", "content": product_description}
 	]
 	
@@ -63,9 +56,47 @@ if __name__ == "__main__":
 
 	# print(firstPrompt)
 	# print(secondPrompt)
-	result = flow(data)
-	# result_dict = json.loads(result)
+	result = flow(data, endpoint_name, api_key_name)
+	return result
 
+
+# def twoPrompts():
+# 	componentPrompt = open('./getComponentPrompt.txt').read()
+
+# 	messages=[
+# 		{"role": "user", "content": (componentPrompt + product_description)},
+# 		# {"role": "user", "content": product_description}
+# 	]
+
+# 	data =  {
+# 		"messages": messages,
+# 		"max_tokens": 3000,
+# 		"temperature": 0.2,
+# 		"top_p": 1
+# 	}
+
+# 	# print(firstPrompt)
+# 	# print(secondPrompt)
+# 	result = flow(data)
+
+
+
+if __name__ == "__main__":
+	# firstPrompt = open('./prompt1.txt').read()
+	prompt = open('./prompt2.txt').read()
+	product_description= "Electric Kettle"
+
+	combined_prompt_output = makePromptCall(file_name='./prompt2.txt', prompt_text=product_description, endpoint_name="PHI_3_MEDIUM_4K_ENDPOINT", api_key_name="PHI_3_MEDIUM_4K_API_KEY")
+	print(f"\n\n{'~'*10} Combined Prompt Output {'~'*10}")
+	print(combined_prompt_output)
+	componentPrompt = open('./getComponentPrompt.txt').read()
+	componentsJson = makePromptCall(file_name='./getComponentPrompt.txt', prompt_text=product_description, endpoint_name="PHI_3_MEDIUM_4K_ENDPOINT", api_key_name="PHI_3_MEDIUM_4K_API_KEY")
+
+	manufacturingPrompt = open('./getManufacturingProcesses.txt').read()
+	result = makePromptCall(file_name='./getManufacturingProcesses.txt', prompt_text=componentsJson, endpoint_name="PHI_3_MINI_4K_ENDPOINT", api_key_name="PHI_3_MINI_4K_API_KEY")
+
+	# result_dict = json.loads(result)
+	print(f"\n\n{'~'*10} Separate Prompt Output {'~'*10}")
 	print(result)
 
 
