@@ -24,68 +24,118 @@ Windows: ```.\.venv\Scripts\activate``` Mac: ```source .\.venv\bin\activate```
 {
 	"components": [
 		{
-			"component_name": "Elastomeric Half Mask Respirator",
-			"quantity": 1,
-			"material": "Silicone",
+			"component_name": "Electric Kettle",
+			"material": "Stainless Steel",
 			"manufacturing_processes": [
 				{
-					"type": "Extrusion"
+					"type": "Stamping"
 				},
 				{
-					"type": "Thermoforming"
-				},
-				{
-					"type": "Casting"
+					"type": "Welding"
 				}
 			],
 			"subcomponents": [
-				{
-					"component_name": "Filter Cartridge",
-					"quantity": 1,
-					"material": "Polypropylene",
-					"manufacturing_processes": [
+			{
+				"component_name": "Kettle Body",
+				"material": "Stainless Steel",
+				"manufacturing_processes": [
+					{
+						"type": "Stamping"
+					},
+					{
+						"type": "Welding"
+					},
+					{
+						"type": "Heat Treatment"
+					}
+				],
+				"subcomponents": [
+					{
+						"component_name": "Lid",
+						"material": "Plastic",
+						"manufacturing_processes": [
 						{
-							"type": "Extrusion"
+							"type": "Injection Molding"
+						}
+						]
+					},
+					{
+						"component_name": "Spout",
+						"material": "Stainless Steel",
+						"manufacturing_processes": [
+						{
+							"type": "Stamping"
 						},
 						{
-							"type": "Structural Foam Molding"
+							"type": "Welding"
 						}
+						]
+					},
+					{
+						"component_name": "Base",
+						"material": "Stainless Steel",
+						"manufacturing_processes": [
+						{
+							"type": "Stamping"
+						},
+						{
+							"type": "Welding"
+						},
+						{
+							"type": "Heat Treatment"
+						},
+						{
+							"type": "Laser Cutting"
+						}
+						],
+						"subcomponents": [
+						{
+							"component_name": "Heating Element",
+							"material": "Copper",
+							"manufacturing_processes": [
+							{
+								"type": "Wire Drawing"
+							}
+							]
+						},
+						{
+							"component_name": "Power Switch",
+							"material": "Plastic",
+							"manufacturing_processes": [
+							{
+								"type": "Injection Molding"
+							}
+							]
+						},
+						{
+							"component_name": "Thermostat",
+							"material": "Plastic",
+							"manufacturing_processes": [
+							{
+								"type": "Injection Molding"
+							}
+							]
+						}
+						]
+					}
 					]
 				},
 				{
-					"component_name": "Exhalation Valve",
-					"quantity": 1,
-					"material": "Silicone",
+					"component_name": "Handle",
+					"material": "Plastic",
 					"manufacturing_processes": [
-						{
-							"type": "Molding"
-						}
+					{
+						"type": "Injection Molding"
+					}
 					]
 				},
 				{
-					"component_name": "Head Harness",
-					"quantity": 1,
-					"material": "Nylon",
+					"component_name": "Power Cord",
+					"material": "Corded Plastic",
 					"manufacturing_processes": [
-						{
-							"type": "Weaving"
-						},
-						{
-							"type": "Knitting"
-						}
-					]
-				},
-				{
-					"component_name": "Eye Cup",
-					"quantity": 2,
-					"material": "Silicone",
-					"manufacturing_processes": [
-						{
-							"type": "Extrusion"
-						},
-						{
-							"type": "Thermoforming"
-						}
+					{
+						"type": "Injection Molding"
+					}
 					]
 				}
 			]
