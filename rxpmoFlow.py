@@ -39,6 +39,15 @@ def flow(data: dict, endpoint_name: str, api_key_name: str) -> str:
 
 	return result
 
+# makes a call to an azure endpoint.
+# input: 
+# 	filename where the prompt is written
+#	prompt_text: product description.
+#	endpoint_name: name of endpoint in the .env file
+# 	api_key_name: name of api_key in the .env file
+# output:
+#	returns a string output
+# calls another function 
 def makePromptCall(file_name: str, prompt_text: str, endpoint_name: str, api_key_name: str) -> str:
 	prompt = open(file_name).read()
 	messages=[
@@ -55,26 +64,6 @@ def makePromptCall(file_name: str, prompt_text: str, endpoint_name: str, api_key
 
 	result = flow(data, endpoint_name, api_key_name)
 	return result
-
-
-# def twoPrompts():
-# 	componentPrompt = open('./getComponentPrompt.txt').read()
-
-# 	messages=[
-# 		{"role": "user", "content": (componentPrompt + product_description)},
-# 		# {"role": "user", "content": product_description}
-# 	]
-
-# 	data =  {
-# 		"messages": messages,
-# 		"max_tokens": 3000,
-# 		"temperature": 0.2,
-# 		"top_p": 1
-# 	}
-
-# 	# print(firstPrompt)
-# 	# print(secondPrompt)
-# 	result = flow(data)
 
 
 
