@@ -1,0 +1,180 @@
+ Here is the hierarchical assembly tree structure for an Electric Kettle in JSON format:
+
+```json
+{
+  "components": [
+    {
+      "component_name": "Electric Kettle",
+      "quantity": 1,
+      "subcomponents": [
+        {
+          "component_name": "Kettle Body",
+          "quantity": 1,
+          "subcomponents": [
+            {
+              "component_name": "Lid",
+              "quantity": 1
+            },
+            {
+              "component_name": "Spout",
+              "quantity": 1
+            },
+            {
+              "component_name": "Base",
+              "quantity": 1,
+              "subcomponents": [
+                {
+                  "component_name": "Heating Element",
+                  "quantity": 1
+                },
+                {
+                  "component_name": "Power Switch",
+                  "quantity": 1
+                },
+                {
+                  "component_name": "Thermostat",
+                  "quantity": 1
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "component_name": "Handle",
+          "quantity": 1
+        },
+        {
+          "component_name": "Power Cord",
+          "quantity": 1
+        }
+      ]
+    }
+  ]
+}
+``` Given the provided JSON structure for an Electric Kettle and the list of possible manufacturing processes, here is the expanded JSON object with materials and manufacturing processes for each component and subcomponent:
+
+```json
+{
+  "components": [
+    {
+      "component_name": "Electric Kettle",
+      "material": "Stainless Steel",
+      "manufacturing_processes": [
+        {
+          "type": "Stamping"
+        },
+        {
+          "type": "Welding"
+        }
+      ],
+      "subcomponents": [
+        {
+          "component_name": "Kettle Body",
+          "material": "Stainless Steel",
+          "manufacturing_processes": [
+            {
+              "type": "Stamping"
+            },
+            {
+              "type": "Welding"
+            },
+            {
+              "type": "Heat Treatment"
+            }
+          ],
+          "subcomponents": [
+            {
+              "component_name": "Lid",
+              "material": "Plastic",
+              "manufacturing_processes": [
+                {
+                  "type": "Injection Molding"
+                }
+              ]
+            },
+            {
+              "component_name": "Spout",
+              "material": "Stainless Steel",
+              "manufacturing_processes": [
+                {
+                  "type": "Stamping"
+                },
+                {
+                  "type": "Welding"
+                }
+              ]
+            },
+            {
+              "component_name": "Base",
+              "material": "Stainless Steel",
+              "manufacturing_processes": [
+                {
+                  "type": "Stamping"
+                },
+                {
+                  "type": "Welding"
+                },
+                {
+                  "type": "Heat Treatment"
+                },
+                {
+                  "type": "Laser Cutting"
+                }
+              ],
+              "subcomponents": [
+                {
+                  "component_name": "Heating Element",
+                  "material": "Copper",
+                  "manufacturing_processes": [
+                    {
+                      "type": "Wire Drawing"
+                    }
+                  ]
+                },
+                {
+                  "component_name": "Power Switch",
+                  "material": "Plastic",
+                  "manufacturing_processes": [
+                    {
+                      "type": "Injection Molding"
+                    }
+                  ]
+                },
+                {
+                  "component_name": "Thermostat",
+                  "material": "Plastic",
+                  "manufacturing_processes": [
+                    {
+                      "type": "Injection Molding"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "component_name": "Handle",
+          "material": "Plastic",
+          "manufacturing_processes": [
+            {
+              "type": "Injection Molding"
+            }
+          ]
+        },
+        {
+          "component_name": "Power Cord",
+          "material": "Corded Plastic",
+          "manufacturing_processes": [
+            {
+              "type": "Injection Molding"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+This JSON object includes the materials and manufacturing processes for each component and subcomponent of the Electric Kettle, based on the provided sample manufacturing processes.

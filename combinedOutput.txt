@@ -1,0 +1,77 @@
+ ```json
+{
+  "components": [
+    {
+      "component_name": "Kettle Body",
+      "quantity": 1,
+      "material": "Stainless Steel",
+      "manufacturing_processes": [
+        {
+          "type": "Extrusion"
+        },
+        {
+          "type": "Casting"
+        }
+      ],
+      "subcomponents": [
+        {
+          "component_name": "Heating Element",
+          "quantity": 1,
+          "material": "Nickel-Chromium Alloy",
+          "manufacturing_processes": [
+            {
+              "type": "Extrusion"
+            },
+            {
+              "type": "Wire Drawing"
+            }
+          ],
+          "subcomponents": []
+        },
+        {
+          "component_name": "Base",
+          "quantity": 1,
+          "material": "Stainless Steel",
+          "manufacturing_processes": [
+            {
+              "type": "Stamping"
+            },
+            {
+              "type": "Welding"
+            }
+          ],
+          "subcomponents": []
+        },
+        {
+          "component_name": "Lid",
+          "quantity": 1,
+          "material": "Stainless Steel",
+          "manufacturing_processes": [
+            {
+              "type": "Stamping"
+            },
+            {
+              "type": "Welding"
+            }
+          ],
+          "subcomponents": []
+        },
+        {
+          "component_name": "Handle",
+          "quantity": 1,
+          "material": "Stainless Steel",
+          "manufacturing_processes": [
+            {
+              "type": "Extrusion"
+            },
+            {
+              "type": "Stamping"
+            }
+          ],
+          "subcomponents": []
+        }
+      ]
+    }
+  ]
+}
+```
