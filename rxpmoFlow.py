@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 from promptflow.tracing import trace
 import urllib.request
 import json
+import time
 # from promptflow.core import tool
 
 # Function to make the api call using the headers and body and url
@@ -71,7 +72,7 @@ def makePromptCall(file_name: str, prompt_text: str, endpoint_name: str, api_key
 if __name__ == "__main__":
 	# firstPrompt = open('./prompt1.txt').read()
 	prompt = open('./prompt2.txt').read()
-	product_description="Bluetooth Speaker"
+	product_description="Solar Panel"
 	# product_description="An elastomeric half mask respirator tight-fitting facepiece"
 
 	combined_prompt_output = makePromptCall(file_name='./prompt2.txt', 
@@ -80,7 +81,9 @@ if __name__ == "__main__":
 										 api_key_name="PHI_3_MEDIUM_128K_API_KEY")
 	print(f"\n\n{'~'*10} Combined Prompt Output {'~'*10}")
 	print(combined_prompt_output)
-	combined_file = open('./combinedOutput.txt', 'w+')
+	cFileName = './output/combinedOutput_' + str(int(time.time())) + '.txt'
+	combined_file = open(cFileName, 'w+')
+	combined_file.write(product_description + '\n')
 	combined_file.write(combined_prompt_output)
 	combined_file.close()
 
@@ -97,7 +100,9 @@ if __name__ == "__main__":
 	print(f"\n\n{'~'*10} Separate Prompt Output {'~'*10}")
 	print(result)
 	# separate_file = open('./separateOutput4K.txt', 'w+')
-	separate_file = open('./separateOutput128K.txt', 'w+')
+	sFileName = './output/separateOutput128K_' + str(int(time.time())) + '.txt'
+	separate_file = open(sFileName, 'w+')
+	separate_file.write(product_description + '\n')
 	separate_file.write(componentsJson + result)
 	# separate_file.write(result)
 	separate_file.close()
