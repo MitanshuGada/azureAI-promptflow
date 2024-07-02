@@ -1,6 +1,6 @@
 import os
 from dotenv import load_dotenv
-# from promptflow.tracing import trace
+from promptflow.tracing import trace
 import urllib.request
 import json
 # from promptflow.core import tool
@@ -24,7 +24,7 @@ def requestData(url: str, body: str, headers: dict):
 
 
 # returns a string 
-# @trace
+@trace
 def flow(data: dict, endpoint_name: str, api_key_name: str) -> str:
 	body = str.encode(json.dumps(data))
 
