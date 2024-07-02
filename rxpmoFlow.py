@@ -22,6 +22,7 @@ def requestData(url: str, body: str, headers: dict):
 		print(error.info())
 		print(error.read().decode("utf8", 'ignore'))
 
+
 # returns a string 
 # @trace
 def flow(data: dict, endpoint_name: str, api_key_name: str) -> str:
@@ -70,17 +71,27 @@ def makePromptCall(file_name: str, prompt_text: str, endpoint_name: str, api_key
 if __name__ == "__main__":
 	# firstPrompt = open('./prompt1.txt').read()
 	prompt = open('./prompt2.txt').read()
-	product_description= "Electric Kettle"
+	product_description="Bluetooth Speaker"
+	# product_description="An elastomeric half mask respirator tight-fitting facepiece"
 
-	combined_prompt_output = makePromptCall(file_name='./prompt2.txt', prompt_text=product_description, endpoint_name="PHI_3_MEDIUM_4K_ENDPOINT", api_key_name="PHI_3_MEDIUM_4K_API_KEY")
+	combined_prompt_output = makePromptCall(file_name='./prompt2.txt', 
+										 prompt_text=product_description, 
+										 endpoint_name="PHI_3_MEDIUM_128K_ENDPOINT", 
+										 api_key_name="PHI_3_MEDIUM_128K_API_KEY")
 	print(f"\n\n{'~'*10} Combined Prompt Output {'~'*10}")
 	print(combined_prompt_output)
 	combined_file = open('./combinedOutput.txt', 'w+')
 	combined_file.write(combined_prompt_output)
 	combined_file.close()
 
-	componentsJson = makePromptCall(file_name='./getComponentPrompt.txt', prompt_text=product_description, endpoint_name="PHI_3_MEDIUM_4K_ENDPOINT", api_key_name="PHI_3_MEDIUM_4K_API_KEY")
-	result = makePromptCall(file_name='./getManufacturingProcesses.txt', prompt_text=componentsJson, endpoint_name="PHI_3_MINI_128K_ENDPOINT", api_key_name="PHI_3_MINI_128K_API_KEY")
+	componentsJson = makePromptCall(file_name='./getComponentPrompt.txt', 
+								 prompt_text=product_description, 
+								 endpoint_name="PHI_3_MEDIUM_128K_ENDPOINT", 
+								 api_key_name="PHI_3_MEDIUM_128K_API_KEY")
+	result = makePromptCall(file_name='./getManufacturingProcesses.txt', 
+						 prompt_text=componentsJson, 
+						 endpoint_name="PHI_3_MINI_128K_ENDPOINT", 
+						 api_key_name="PHI_3_MINI_128K_API_KEY")
 
 	# result_dict = json.loads(result)
 	print(f"\n\n{'~'*10} Separate Prompt Output {'~'*10}")

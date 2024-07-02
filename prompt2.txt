@@ -66,7 +66,9 @@ Standard Responses:
 Product Identification:
 Ensure to identify the product name at the end of the prompt for context.
 
+Example Output:
 Here is an example of how the JSON output should be structured:
+```
 {
   "components": [
     {
@@ -100,5 +102,6 @@ Here is an example of how the JSON output should be structured:
     }
   ]
 }
+```
 
 Name of the Product:
