@@ -11,9 +11,9 @@ def requestData(url: str, body: str, headers: dict):
 	req = urllib.request.Request(url, body, headers)
 
 	try:
-		print("making the api call...")
+		# print("making the api call...")
 		response = urllib.request.urlopen(req)
-		print("response received...")
+		# print("response received...")
 		result = response.read()
 		return result
 	except urllib.error.HTTPError as error:
@@ -26,17 +26,17 @@ def requestData(url: str, body: str, headers: dict):
 
 # returns a string 
 @trace
-def flow(data: dict, endpoint_name: str, api_key_name: str) -> str:
+def flow(data: dict, endpointName: str, apiKeyName: str) -> str:
 	body = str.encode(json.dumps(data))
 
 	load_dotenv()
 	# url = os.getenv("PHI_3_MINI_4K_ENDPOINT")
-	# api_key = os.getenv("PHI_3_MINI_4K_API_KEY")
-	url = os.getenv(endpoint_name)
-	api_key = os.getenv(api_key_name)
-	print("endpoint and api key loaded...")
+	# apiKey = os.getenv("PHI_3_MINI_4K_API_KEY")
+	url = os.getenv(endpointName)
+	apiKey = os.getenv(apiKeyName)
+	# print("endpoint and api key loaded...")
 	
-	headers = {"Content-Type": "application/json", "Authorization" :('Bearer '+ api_key)}
+	headers = {"Content-Type": "application/json", "Authorization" : ('Bearer '+ apiKey)}
 	result = json.loads(requestData(url, body, headers).decode('utf-8'))['choices'][0]['message']['content']
 
 	return result
@@ -45,16 +45,16 @@ def flow(data: dict, endpoint_name: str, api_key_name: str) -> str:
 # input: 
 # 	filename where the prompt is written
 #	prompt_text: product description.
-#	endpoint_name: name of endpoint in the .env file
-# 	api_key_name: name of api_key in the .env file
+#	endpointName: name of endpoint in the .env file
+# 	apiKeyName: name of apiKey in the .env file
 # output:
 #	returns a string output
 # calls another function 
-def makePromptCall(file_name: str, prompt_text: str, endpoint_name: str, api_key_name: str) -> str:
+def makePromptCall(file_name: str, prompt_text: str, endpointName: str, apiKeyName: str) -> str:
 	prompt = open(file_name).read()
 	messages=[
 		{"role": "user", "content": (prompt + prompt_text)},
-		# {"role": "user", "content": product_description}
+		# {"role": "user", "content": productDescription}
 	]
 	
 	data =  {
@@ -64,49 +64,89 @@ def makePromptCall(file_name: str, prompt_text: str, endpoint_name: str, api_key
 		"top_p": 1
 	}
 
-	result = flow(data, endpoint_name, api_key_name)
+	result = flow(data, endpointName, apiKeyName)
 	return result
 
+
+def writeToFile(filename: str, text: str, permissions: str) -> None:
+	try:
+		file = open(filename, permissions)
+		file.write(text)
+		file.close()
+
+	except:
+		print("error")
 
 
 if __name__ == "__main__":
 	# firstPrompt = open('./prompt1.txt').read()
-	prompt = open('./prompt2.txt').read()
-	product_description="Solar Panel"
-	# product_description="An elastomeric half mask respirator tight-fitting facepiece"
-
-	combined_prompt_output = makePromptCall(file_name='./prompt2.txt', 
-										 prompt_text=product_description, 
-										 endpoint_name="PHI_3_MEDIUM_128K_ENDPOINT", 
-										 api_key_name="PHI_3_MEDIUM_128K_API_KEY")
-	print(f"\n\n{'~'*10} Combined Prompt Output {'~'*10}")
-	print(combined_prompt_output)
-	cFileName = './output/combinedOutput_' + str(int(time.time())) + '.txt'
-	combined_file = open(cFileName, 'w+')
-	combined_file.write(product_description + '\n')
-	combined_file.write(combined_prompt_output)
-	combined_file.close()
-
-	componentsJson = makePromptCall(file_name='./getComponentPrompt.txt', 
-								 prompt_text=product_description, 
-								 endpoint_name="PHI_3_MEDIUM_128K_ENDPOINT", 
-								 api_key_name="PHI_3_MEDIUM_128K_API_KEY")
-	result = makePromptCall(file_name='./getManufacturingProcesses.txt', 
-						 prompt_text=componentsJson, 
-						 endpoint_name="PHI_3_MINI_128K_ENDPOINT", 
-						 api_key_name="PHI_3_MINI_128K_API_KEY")
-
-	# result_dict = json.loads(result)
-	print(f"\n\n{'~'*10} Separate Prompt Output {'~'*10}")
-	print(result)
-	# separate_file = open('./separateOutput4K.txt', 'w+')
-	sFileName = './output/separateOutput128K_' + str(int(time.time())) + '.txt'
-	separate_file = open(sFileName, 'w+')
-	separate_file.write(product_description + '\n')
-	separate_file.write(componentsJson + result)
-	# separate_file.write(result)
-	separate_file.close()
+	listOfAllProducts = ['Elastomeric Half Mask Respirator',
+					#   'SmartPhone', 'Electric Kettle', 'Laptop',
+					#   'Bluetooth Speaker', 'Solar Panel', 
+					#   'LED Light Bulb', 'Washing Machine'
+					#   'Air Conditioner', 'Electric Toothbrush', 'Drone',
+					#   'Fitness Tracker', 'Tablet', 'Electric Scooter',
+					#   'Microwave Oven', 'Digital Camera'
+					  ]
 	
+	for productDescription in listOfAllProducts:
+		startTime = time.time()
+		timeWhenRan = str(int(startTime))
+
+		prompt = open('./prompt2.txt').read()
+		# productDescription=productDescription
+		# productDescription="An elastomeric half mask respirator tight-fitting facepiece"
+
+		combinedPromptOutput = makePromptCall(file_name='./prompt2.txt', 
+											prompt_text=productDescription, 
+											endpointName="PHI_3_MEDIUM_128K_ENDPOINT", 
+											apiKeyName="PHI_3_MEDIUM_128K_API_KEY")
+		# print(f"\n\n{'~'*10} Combined Prompt Output {'~'*10}")
+		# print(combinedPromptOutput)
+		
+		# timeWhenRan = str(int(time.time()))
+		
+		cFileName = './output/combinedOutput_' + timeWhenRan + '.txt'
+		textToWrite = productDescription + '\n' + combinedPromptOutput
+		writeToFile(cFileName, textToWrite, 'w+')
+
+		
+		# two separate prompts, targeting individual tasks
+		componentsJson = makePromptCall(file_name='./getComponentPrompt.txt', 
+									prompt_text=productDescription, 
+									endpointName="PHI_3_MEDIUM_128K_ENDPOINT", 
+									apiKeyName="PHI_3_MEDIUM_128K_API_KEY")
+		separatePromptOutput = makePromptCall(file_name='./getManufacturingProcesses.txt', 
+							prompt_text=componentsJson, 
+							endpointName="PHI_3_MINI_128K_ENDPOINT", 
+							apiKeyName="PHI_3_MINI_128K_API_KEY")
+
+		# result_dict = json.loads(result)
+		# print(f"\n\n{'~'*10} Separate Prompt Output {'~'*10}")
+		# print(separatePromptOutput)
+
+		sFileName = './output/separateOutput128K_' + timeWhenRan + '.txt'
+		textToWrite = productDescription + '\n' + componentsJson + '\n' + separatePromptOutput
+		writeToFile(sFileName, textToWrite, 'w+')
+		endTime = time.time()
+
+		print(f"{productDescription} \n{endTime} - {startTime} = {endTime - startTime} s")
+		# evaluate
+		# evalResults = makePromptCall(file_name='./evalPrompt.txt', 
+		# 							prompt_text=combinedPromptOutput, 
+		# 							endpointName="PHI_3_MEDIUM_128K_ENDPOINT", 
+		# 							apiKeyName="PHI_3_MEDIUM_128K_API_KEY")
+
+		# print(evalResults)
+
+		# evalResults = makePromptCall(file_name='./evalPrompt.txt', 
+		# 							prompt_text=separatePromptOutput, 
+		# 							endpointName="PHI_3_MEDIUM_128K_ENDPOINT", 
+		# 							apiKeyName="PHI_3_MEDIUM_128K_API_KEY")
+
+		# print(evalResults)
+
+
 	print("system.close()")
 
 
