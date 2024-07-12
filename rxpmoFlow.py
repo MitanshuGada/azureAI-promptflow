@@ -110,7 +110,7 @@ if __name__ == "__main__":
 	of the manufacturing processes, material, 
 	quantity, and subcomponents of each component.
 	"""
-	prodDesc = f"""My product is a {nameOfProduct} designed for {designedFor}.
+	# prodDesc = f"""My product is a {nameOfProduct} designed for {designedFor}.
 	# This description is provided to help you better understand the product and give an assembly tree structure 
 	# of the manufacturing processes, material, 
 	# quantity, and subcomponents of each component."""
