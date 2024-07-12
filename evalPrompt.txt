@@ -1,0 +1,129 @@
+Evaluation Prompt:
+
+You are tasked with evaluating the performance of a detailed and knowledgeable manufacturing assistant. This assistant's role is to generate a comprehensive bill of materials (BOM) in a hierarchical assembly tree structure and list all possible manufacturing processes that could be used for each component of a given product. The evaluation will focus on accuracy, completeness, adherence to the specified format, consistency in results, and correctness of the output.
+
+Task:
+
+Bill of Materials (BOM) Generation: The assistant should generate a BOM in a hierarchical assembly tree structure for the given product.
+Manufacturing Processes: Each component in the BOM should include the component name, quantity, material, and a list of possible manufacturing processes.
+JSON Format: The output should be formatted as a JSON object.
+Criteria for Evaluation:
+
+Relevance:
+
+Does the assistant correctly identify and list all components of the product?
+Are the manufacturing processes appropriate for each component?
+Accuracy:
+
+Are the quantities, materials, and manufacturing processes accurately listed for each component?
+Identify any inaccuracies in the quantities, materials, or processes listed.
+Format Adherence:
+
+Is the output correctly formatted as a JSON object as specified?
+Is the hierarchical structure of the assembly tree maintained?
+Point out any deviations from the specified format.
+Standard Responses:
+
+Does the assistant correctly respond with "I can only provide information about the bill of materials and manufacturing processes for products." if the query is unrelated?
+Does the assistant correctly respond with "I cannot provide information on this topic." for queries involving inappropriate content?
+Image Analysis (if applicable):
+
+If an image is provided, does the assistant correctly analyze the image to identify components and generate the BOM accordingly?
+Consistency:
+
+For a single product description, does the assistant provide consistent results? If multiple different results are provided for the same product description, the model is not performing as needed.
+Single JSON Output:
+
+For each prompt, there should be only one JSON file. If multiple JSON files are provided in response to a single product description, the result is incorrect.
+Instructions for Evaluators:
+
+Input:
+
+Provide a detailed description of a product for which the assistant will generate the BOM and manufacturing processes.
+Optionally, provide an image of the product for analysis.
+Evaluation:
+
+Compare the assistant's output to the expected BOM and manufacturing processes.
+Check for completeness and accuracy of the BOM.
+Verify that the JSON format is correct and that the hierarchical assembly tree structure is maintained.
+Ensure that the standard responses are used appropriately.
+Ensure consistency in the results. Multiple different outputs for the same product description indicate a performance issue.
+Verify that only one JSON file is provided per prompt. Multiple JSON files for a single prompt indicate a performance issue.
+Example Product Description:
+
+Product Name: Bluetooth Speaker
+Product Description: A portable Bluetooth speaker with components such as housing, speaker driver, battery, PCB assembly, control buttons, charging port, and LED indicators.
+Example Output:
+
+json
+Copy code
+{
+  "components": [
+    {
+      "component_name": "Frame",
+      "quantity": 1,
+      "material": "Aluminum",
+      "manufacturing_processes": [
+        {
+          "type": "Extrusion"
+        },
+        {
+          "type": "Casting"
+        }
+      ],
+      "subcomponents": [
+        {
+          "component_name": "Bracket",
+          "quantity": 4,
+          "material": "Steel",
+          "manufacturing_processes": [
+            {
+              "type": "Stamping"
+            },
+            {
+              "type": "Welding"
+            }
+          ],
+          "subcomponents": []
+        }
+      ]
+    }
+  ]
+}
+Evaluation Form:
+
+Relevance (Score: 1-5):
+
+Comments:
+Identified Issues:
+Accuracy (Score: 1-5):
+
+Comments:
+Identified Issues:
+Format Adherence (Score: 1-5):
+
+Comments:
+Identified Issues:
+Standard Responses (Score: 1-5):
+
+Comments:
+Identified Issues:
+Image Analysis (if applicable) (Score: 1-5):
+
+Comments:
+Identified Issues:
+Consistency (Score: 1-5):
+
+Comments:
+Identified Issues:
+Single JSON Output (Score: 1-5):
+
+Comments:
+Identified Issues:
+Scoring Guide:
+
+5: Excellent – Exceeds expectations in all criteria.
+4: Good – Meets all criteria with minor issues.
+3: Satisfactory – Meets most criteria but with some issues.
+2: Needs Improvement – Meets some criteria but with significant issues.
+1: Poor – Does not meet the criteria.
