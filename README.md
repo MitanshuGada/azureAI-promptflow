@@ -15,7 +15,7 @@ Windows: ```.\.venv\Scripts\activate``` Mac: ```source .\.venv\bin\activate```
 
 5. Create a .env file and add the LLM endpoint and the api key
 6. Modify the name of the environment variable in the file
-7. Modify the prompt according to your requirements
+7. Modify the prompt files accordingly
 8. Run the rxpmoFlow.py
 ```python rxpmoFlow.py```
 
